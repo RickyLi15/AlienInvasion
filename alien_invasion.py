@@ -8,6 +8,7 @@ from ship import Ship
 from bullet import Bullet
 from alien import Alien
 from button import Button
+import json
 
 class AlienInvasion:
     """Overall class to manage game assets and behavior"""
@@ -120,6 +121,9 @@ class AlienInvasion:
              self.ship.moving_left = True
         # the game quits when the player presses Q
         elif event.key == pygame.K_q:
+        # Before quitting the game, stores the high score in a file
+            with open("highscore.txt",'w') as file_object:
+                json.dump(self.stats.high_score,file_object)
             sys.exit()
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
